@@ -1,0 +1,49 @@
+[1mdiff --git a/lib/Screens/circleCard.dart b/lib/Screens/circleCard.dart[m
+[1mdeleted file mode 100644[m
+[1mindex 66e91e5..0000000[m
+[1m--- a/lib/Screens/circleCard.dart[m
+[1m+++ /dev/null[m
+[36m@@ -1,32 +0,0 @@[m
+[31m-import 'package:flutter/material.dart';[m
+[31m-[m
+[31m-class CircleCard extends StatelessWidget {[m
+[31m-  CircleCard(this.path, this.width, this.text);[m
+[31m-[m
+[31m-  String path;[m
+[31m-  String text;[m
+[31m-  double width = 0;[m
+[31m-[m
+[31m-  @override[m
+[31m-  Widget build(BuildContext context) {[m
+[31m-    return Column([m
+[31m-      children: [[m
+[31m-        CircleAvatar([m
+[31m-          backgroundColor: Color.fromARGB(255, 210, 227, 212),[m
+[31m-          radius: 45.0,[m
+[31m-          child: Container([m
+[31m-            width: width,[m
+[31m-            child: Image.asset(path),[m
+[31m-          ),[m
+[31m-        ),[m
+[31m-        SizedBox([m
+[31m-          height: 2,[m
+[31m-        ),[m
+[31m-        Text([m
+[31m-          text,[m
+[31m-          style: TextStyle(fontSize: 16),[m
+[31m-        )[m
+[31m-      ],[m
+[31m-    );[m
+[31m-  }[m
+[31m-}[m
+[1mdiff --git a/lib/Screens/homescreencomp/home.dart b/lib/Screens/homescreencomp/home.dart[m
+[1mindex 44e07db..b72d9b7 100644[m
+[1m--- a/lib/Screens/homescreencomp/home.dart[m
+[1m+++ b/lib/Screens/homescreencomp/home.dart[m
+[36m@@ -1,5 +1,5 @@[m
+ import 'package:flutter/material.dart';[m
+[31m-import 'package:rakaab_ui/Screens/circleCard.dart';[m
+[32m+[m[32mimport 'package:rakaab_ui/Screens/homescreencomp/circleCard.dart';[m
+ import 'package:rakaab_ui/Screens/homescreencomp/mainCard.dart';[m
+ import 'package:rakaab_ui/Screens/homescreencomp/overscard.dart';[m
+ import 'package:rakaab_ui/utilits/colors.dart';[m
