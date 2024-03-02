@@ -1,22 +1,31 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:rakaab_ui/Screens/suuqscreens/mainscreen.dart';
 
 class CircleCard extends StatelessWidget {
-  CircleCard(this.path, this.width, this.text);
+  CircleCard(this.path, this.text,
+      {this.radius = 45.0, this.width = 70, this.ontaped});
 
   String path;
   String text;
-  double width = 0;
+  double width;
+  double radius;
+  VoidCallback? ontaped;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CircleAvatar(
-          backgroundColor: Color.fromARGB(255, 210, 227, 212),
-          radius: 45.0,
-          child: Container(
-            width: width,
-            child: Image.asset(path),
+        GestureDetector(
+          onTap: ontaped,
+          child: CircleAvatar(
+            backgroundColor: Color.fromARGB(255, 210, 227, 212),
+            radius: radius,
+            child: Container(
+              width: width,
+              child: Image.asset(path),
+            ),
           ),
         ),
         SizedBox(
@@ -24,7 +33,11 @@ class CircleCard extends StatelessWidget {
         ),
         Text(
           text,
-          style: TextStyle(fontSize: 16),
+          softWrap: true,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 16,
+          ),
         )
       ],
     );
