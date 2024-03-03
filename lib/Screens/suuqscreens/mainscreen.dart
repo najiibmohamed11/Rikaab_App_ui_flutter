@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rakaab_ui/Screens/appar/appar.dart';
 import 'package:rakaab_ui/Screens/homescreencomp/circleCard.dart';
+import 'package:rakaab_ui/Screens/suuqscreens/electronics/electronics.dart';
+import 'package:rakaab_ui/Screens/suuqscreens/storList.dart';
 import 'package:rakaab_ui/utilits/colors.dart';
 
 class Mainsuuq extends StatefulWidget {
@@ -11,10 +13,11 @@ class Mainsuuq extends StatefulWidget {
 }
 
 class _MainsuuqState extends State<Mainsuuq> {
-  List<Map<String, String>> categories = [
+  List<Map<String, dynamic>> categories = [
     {
       "path": "assets/electronic.png",
       "Text": "electronic",
+      "ontaped": ElectrincStores()
     },
     {
       "path": "assets/furniture.png",
@@ -52,7 +55,7 @@ class _MainsuuqState extends State<Mainsuuq> {
 
   late TextEditingController _searchController;
 
-  List<Map<String, String>> filteredCategories = [];
+  List<Map<String, dynamic>> filteredCategories = [];
 
   @override
   void initState() {
@@ -139,10 +142,19 @@ class _MainsuuqState extends State<Mainsuuq> {
                   spacing: 25.0,
                   runSpacing: 15.0,
                   children: filteredCategories.map((category) {
-                    return CircleCard(
-                      category["path"]!,
-                      category["Text"]!,
-                    );
+                    return CircleCard(category["path"]!, category["Text"]!,
+                        ontaped: category["ontaped"] != null
+                            ? () {
+                                // Navigation callback for electronics category
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return category[
+                                        "ontaped"]; // Assuming ElectronicStores is your electronic list screen
+                                  }),
+                                );
+                              }
+                            : () {});
                   }).toList(),
                 ),
               ),

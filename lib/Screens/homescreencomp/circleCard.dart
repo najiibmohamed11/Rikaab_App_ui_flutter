@@ -7,6 +7,7 @@ class CircleCard extends StatelessWidget {
   CircleCard(this.path, this.text,
       {this.radius = 45.0, this.width = 70, this.ontaped});
 
+
   String path;
   String text;
   double width;
