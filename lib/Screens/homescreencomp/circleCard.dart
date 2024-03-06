@@ -5,13 +5,16 @@ import 'package:rakaab_ui/Screens/suuqscreens/mainscreen.dart';
 
 class CircleCard extends StatelessWidget {
   CircleCard(this.path, this.text,
-      {this.radius = 45.0, this.width = 70, this.ontaped});
-
+      {this.radius = 45.0,
+      this.width = 70,
+      this.ontaped,
+      this.bordersize = 0.0});
 
   String path;
   String text;
   double width;
   double radius;
+  double bordersize;
   VoidCallback? ontaped;
 
   @override
@@ -20,12 +23,20 @@ class CircleCard extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: ontaped,
-          child: CircleAvatar(
-            backgroundColor: Color.fromARGB(255, 210, 227, 212),
-            radius: radius,
-            child: Container(
-              width: width,
-              child: Image.asset(path),
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Colors.blue, // Set the color of the border here
+                width: bordersize, // Set the width of the border here
+              ),
+            ),
+            child: CircleAvatar(
+              radius: radius,
+              child: Container(
+                width: width,
+                child: Image.asset(path),
+              ),
             ),
           ),
         ),

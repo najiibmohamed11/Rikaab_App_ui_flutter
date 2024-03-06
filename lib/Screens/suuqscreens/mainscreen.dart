@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rakaab_ui/Screens/appar/appar.dart';
 import 'package:rakaab_ui/Screens/homescreencomp/circleCard.dart';
+import 'package:rakaab_ui/Screens/searchpar/searchpar.dart';
 import 'package:rakaab_ui/Screens/suuqscreens/electronics/electronics.dart';
 import 'package:rakaab_ui/Screens/suuqscreens/storList.dart';
 import 'package:rakaab_ui/utilits/colors.dart';
@@ -71,18 +72,20 @@ class _MainsuuqState extends State<Mainsuuq> {
   }
 
   void filterCategories(String query) {
-    filteredCategories.clear();
-    if (query.isEmpty) {
-      filteredCategories.addAll(categories);
-      return;
-    }
-    filteredCategories.addAll(
-      categories.where(
-        (category) => category['Text']!.toLowerCase().contains(
-              query.toLowerCase(),
-            ),
-      ),
-    );
+    setState(() {
+      filteredCategories.clear();
+      if (query.isEmpty) {
+        filteredCategories.addAll(categories);
+        return;
+      }
+      filteredCategories.addAll(
+        categories.where(
+          (category) => category['Text']!.toLowerCase().contains(
+                query.toLowerCase(),
+              ),
+        ),
+      );
+    });
   }
 
   @override
@@ -91,7 +94,7 @@ class _MainsuuqState extends State<Mainsuuq> {
       backgroundColor: Color(0xffCFD1D5),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
-        child: Costome_appar(),
+        child: Costome_appar("categories"),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -102,32 +105,8 @@ class _MainsuuqState extends State<Mainsuuq> {
               SizedBox(
                 height: 20,
               ),
-              TextField(
-                controller: _searchController,
-                onChanged: (value) {
-                  setState(() {
-                    filterCategories(value);
-                  });
-                },
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white24,
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  hintText: "Search item",
-                  hintStyle: TextStyle(fontSize: 20.0),
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.only(left: 17.0),
-                    child: Icon(
-                      Icons.search,
-                      color: Colors.grey,
-                      size: 50.0,
-                    ),
-                  ),
-                ),
-              ),
+              ReusableTextField(
+                  hintText: "search item", onChanged: filterCategories),
               SizedBox(
                 height: 17.0,
               ),

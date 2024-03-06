@@ -1,8 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:rakaab_ui/utilits/colors.dart';
 
 class Costome_appar extends StatelessWidget {
+  Costome_appar(this.title);
+  String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class Costome_appar extends StatelessWidget {
       ),
       centerTitle: true,
       title: Text(
-        "categories",
+        title!,
         style: TextStyle(color: Colors.white),
       ),
       actions: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rakaab_ui/Screens/food/food.dart';
 import 'package:rakaab_ui/Screens/homescreencomp/circleCard.dart';
 import 'package:rakaab_ui/Screens/homescreencomp/mainCard.dart';
 import 'package:rakaab_ui/Screens/homescreencomp/overscard.dart';
@@ -74,7 +75,19 @@ class _HomeState extends State<Home> {
                         );
                       },
                     ),
-                    CircleCard("assets/food.png", width: 100, "Food"),
+                    CircleCard(
+                      "assets/food.png",
+                      width: 100,
+                      "Food",
+                      ontaped: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return Maainfood();
+                          }),
+                        );
+                      },
+                    ),
                   ],
                 ),
                 SizedBox(

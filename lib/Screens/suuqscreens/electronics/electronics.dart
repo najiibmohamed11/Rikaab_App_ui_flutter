@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:rakaab_ui/Screens/appar/appar.dart';
+import 'package:rakaab_ui/Screens/searchpar/searchpar.dart';
 import 'package:rakaab_ui/Screens/suuqscreens/storList.dart';
 
 class ElectrincStores extends StatefulWidget {
-  ElectrincStores({super.key});
+  const ElectrincStores({super.key});
 
   @override
   State<ElectrincStores> createState() => _ElectrincStoresState();
 }
 
 class _ElectrincStoresState extends State<ElectrincStores> {
-  List<Map<String, dynamic>> stores = [
+  final List<Map<String, dynamic>> stores = [
     {"store name": "kaamil computers", "imagepath": "assets/kaamil.jpeg"},
     {
       "store name": "discount computers",
@@ -23,28 +24,28 @@ class _ElectrincStoresState extends State<ElectrincStores> {
     {"store name": "samsung", "imagepath": "assets/samsung.png"}
   ];
 
-  List<Map<String, dynamic>> filtredlist = [];
-  @override
+  // Create a separate state variable for filtered results
+  List<Map<String, dynamic>> filteredList = [];
+
   void initState() {
     super.initState();
 
-    filtredlist.addAll(stores);
+    filteredList.addAll(stores);
   }
 
-
-
   void search(String query) {
-    filtredlist.clear();
-    if (query.isEmpty) {
-      filtredlist.addAll(stores);
-      print("the query is emty");
-      return;
-    }
-    print("the query is not emty");
+    setState(() {
+      filteredList.clear();
+      if (query.isEmpty) {
+        filteredList.addAll(stores);
+        return;
+      }
 
-    filtredlist.addAll(stores.where((element) =>
-        element["store name"]!.toLowerCase().contains(query.toLowerCase())));
-    print(filtredlist);
+      // Consider a more specific matching logic based on your requirements:
+      filteredList.addAll(stores.where((element) =>
+          element["store name"]!.toLowerCase().contains(query.toLowerCase())));
+      print(filteredList);
+    });
   }
 
   @override
@@ -53,49 +54,28 @@ class _ElectrincStoresState extends State<ElectrincStores> {
       backgroundColor: Color(0xffCFD1D5),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
-        child: Costome_appar(),
+        child: Costome_appar("electronics"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(25.0),
         child: Column(
           children: [
-            TextField(
-              onChanged: (value) {
-                setState(() {
-                  search(value);
-                });
-              },
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white24,
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
-                hintText: "Search by store",
-                hintStyle: TextStyle(fontSize: 20.0),
-                prefixIcon: Padding(
-                  padding: const EdgeInsets.only(left: 17.0),
-                  child: Icon(
-                    Icons.search,
-                    color: Colors.grey,
-                    size: 50.0,
-                  ),
-                ),
-              ),
+            ReusableTextField(
+              hintText: "Search by store",
+              onChanged: search,
             ),
             SizedBox(
               height: 25.0,
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: filtredlist.length,
+                itemCount: filteredList.length,
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
                       Storelist(
-                        filtredlist[index]["store name"]!,
-                        filtredlist[index]["imagepath"]!,
+                        filteredList[index]["store name"]!,
+                        filteredList[index]["imagepath"]!,
                       ),
                       SizedBox(height: 25.0),
                     ],
